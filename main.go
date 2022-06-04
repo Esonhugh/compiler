@@ -9,6 +9,7 @@ import (
 	"os"
 )
 
+// MakeToken 词法分析 同时输出结果
 func MakeToken(code string) []*lexer.Token {
 	tokens := lexer.Analyse(code)
 	err := servicePrint.PrintToken(tokens)
@@ -19,6 +20,7 @@ func MakeToken(code string) []*lexer.Token {
 	return tokens
 }
 
+// 
 func Grammar(tokens []*lexer.Token) {
 	gram, correct := grammar.Analyse(tokens)
 	if !correct {

@@ -9,13 +9,16 @@ import (
 	"path/filepath"
 )
 
+// EndToken 结束符号常量定义
 const EndToken = "$"
 
+// Lexer 词法分析器
 type Lexer struct {
 	*util.Stream
 	endToken string
 }
 
+// FromFile 从文件中读入源代码 返回分析后的 Token 列表
 func FromFile(path string) []*Token {
 	absPath, err := filepath.Abs(path)
 	if nil != err {
@@ -30,15 +33,18 @@ func FromFile(path string) []*Token {
 	return NewLexer(f, EndToken).Analyse()
 }
 
+// Analyse 分析源代码
 func Analyse(source string) []*Token {
 	return NewLexer(bytes.NewBufferString(source), EndToken).Analyse()
 }
 
+// NewLexer 创建一个新的语法分析器
 func NewLexer(r io.Reader, et string) *Lexer {
 	s := util.NewStream(r, EndToken)
 	return &Lexer{Stream: s, endToken: et}
 }
 
+// Analyse 分析 Token 列表
 func (l *Lexer) Analyse() []*Token {
 	tokens := make([]*Token, 0)
 	for l.HasNext() {
@@ -110,6 +116,7 @@ func (l *Lexer) Analyse() []*Token {
 	return tokens
 }
 
+// MakeComment 分析注释
 func (l *Lexer) MakeComment() *Token {
 	s := ""
 	for l.HasNext() {
@@ -123,6 +130,7 @@ func (l *Lexer) MakeComment() *Token {
 	return NewToken(COMMENT, s)
 }
 
+// MakeString 分析字符串
 func (l *Lexer) MakeString() *Token {
 	s := ""
 	state := 0
@@ -154,8 +162,10 @@ func (l *Lexer) MakeString() *Token {
 	panic("make string failed")
 }
 
+// MakeVarOrKeyword 分析变量或关键字
 func (l *Lexer) MakeVarOrKeyword() *Token {
 	s := ""
+	// 扫描分析下一个关键字
 	for l.HasNext() {
 		lookahead := l.Peek()
 		if define.IsLiteral(lookahead) {
@@ -183,10 +193,12 @@ func (l *Lexer) MakeVarOrKeyword() *Token {
 	return NewToken(VARIABLE, s)
 }
 
+// MakeOp 分析操作符  + - * / % = != < > 
 func (l *Lexer) MakeOp() *Token {
 	state := 0
 
 	for l.HasNext() {
+		// 向前看一位
 		lookahead := l.Next()
 		switch state {
 		case 0:
@@ -346,6 +358,7 @@ func (l *Lexer) MakeOp() *Token {
 	panic("makeOp failed")
 }
 
+// MakeErr 创建错误 创建报错
 func (l *Lexer) MakeErr(prefix ...string) *Token {
 	s := ""
 	row := l.GetLine()
@@ -368,6 +381,7 @@ func (l *Lexer) MakeErr(prefix ...string) *Token {
 	return NewTokenWithLocation(ERROR, s, row, column)
 }
 
+// MakeNumber 创建数字类型
 func (l *Lexer) MakeNumber() *Token {
 	state := 0
 	s := ""

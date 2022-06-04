@@ -9,8 +9,10 @@ import (
 	"github.com/liushuochen/gotable"
 )
 
+// SymbolTable 即为分析表 是一个二维度结构的 map
 type SymbolTable map[string]map[string]*rule.Formula
 
+// GetAnalysisTable 获取根据 first 集 follow 集 构建分析表
 func GetAnalyzeTable(firstSet first.FirstSet, followSet follow.FollowSet, rules *rule.Rule) SymbolTable {
 	symbolTable := make(SymbolTable)
 	endSymbol := make(map[string]struct{})
@@ -36,9 +38,10 @@ func GetAnalyzeTable(firstSet first.FirstSet, followSet follow.FollowSet, rules 
 			symbolTable[left][key] = nil
 		}
 	}
-	// 到此表结构组装完成
+	// 到此表结构组装初始化完成
 
 	changed := false
+	// 判断是否有新的变化 如果有就继续更迭 直到不再加入表的新变化
 	for {
 		changed = false
 		for left, sets := range firstSet {
@@ -61,11 +64,13 @@ func GetAnalyzeTable(firstSet first.FirstSet, followSet follow.FollowSet, rules 
 					}
 					continue
 				}
+
 				// 无空集
 				symbolTable[left][set] = rules.GetProcessMethod(left, set)
 				if symbolTable[left][set] != nil {
 					changed = true
 				}
+				
 				// 没匹配到
 				if symbolTable[left][set] == nil {
 					for _, out := range rules.Rules[left] {

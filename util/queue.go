@@ -2,6 +2,7 @@ package util
 
 import "container/list"
 
+// IsContainsInt 包含数字
 func IsContainInt(items []int, item int) bool {
 	for _, eachItem := range items {
 		if eachItem == item {
@@ -11,20 +12,22 @@ func IsContainInt(items []int, item int) bool {
 	return false
 }
 
+// Queue 队列
 type Queue struct {
 	list *list.List
 }
 
-// New returns new construct queue
+// New  返回一个新队列
 func New() *Queue {
 	return &Queue{list.New()}
 }
 
-// PushBack inserts element to the queue
+// PushBack adds element to the back of the queue
 func (queue *Queue) PushBack(value interface{}) {
 	queue.list.PushBack(value)
 }
 
+// PushFront adds element to the front of the queue
 func (queue *Queue) PushFront(value interface{}) {
 	queue.list.PushFront(value)
 }

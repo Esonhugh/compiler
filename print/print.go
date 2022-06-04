@@ -10,6 +10,7 @@ import (
 	"strings"
 )
 
+// PrintGrammar 和 Grammar 库一起使用 用于输出语法分析结果
 func PrintGrammar(gram []*grammar.Production) {
 	start := "E"
 	matched := ""
@@ -30,6 +31,7 @@ func PrintGrammar(gram []*grammar.Production) {
 	}
 }
 
+// PrintGrammarLL1 和 GrammarLL1 库一起使用 用于输出语法分析结果
 func PrintGrammarLL1(gram []*grammarLL1.Production) {
 	start := "E"
 	matched := ""
@@ -49,6 +51,7 @@ func PrintGrammarLL1(gram []*grammarLL1.Production) {
 	}
 }
 
+// PrintLexer 和 Lexer 库一起使用 用于输出词法分析结果
 func PrintToken(tokens []*lexer.Token) bool {
 	err := false
 	for i := 0; i < len(tokens); i++ {

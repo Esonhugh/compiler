@@ -9,8 +9,11 @@ import (
 	"strings"
 )
 
+// FollowSet follow集合定义
 type FollowSet map[string]map[string]struct{}
 
+// GetFollowSet 获取 follow 集合
+// 与 FirstSet 类似 
 func GetFollowSet(rule *rule.Rule, start string, firstSet first.FirstSet) FollowSet {
 	followSet := make(FollowSet)
 	if len(firstSet) == 0 {

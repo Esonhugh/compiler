@@ -14,8 +14,10 @@ import (
 	"io"
 )
 
+// EndToken 句子结束符号
 const EndToken = "#"
 
+// Grammar 分析器
 type Grammar struct {
 	Stream   *util.Stream
 	table    analysisTable.SymbolTable
@@ -23,6 +25,7 @@ type Grammar struct {
 	tokens   *util.Queue
 }
 
+// Analyze 分析器结果
 func Analyze(raw []*lexer.Token, rules string, start string) ([]*Production, bool) {
 	g := rule.NewRules()
 	_ = g.AddRules(rules)
@@ -39,6 +42,7 @@ func Analyze(raw []*lexer.Token, rules string, start string) ([]*Production, boo
 	return prod, true
 }
 
+// NewGrammar 创建一个新的分析器 
 func NewGrammar(token []*lexer.Token, r io.Reader, et string, rule analysisTable.SymbolTable) *Grammar {
 	s := util.NewStream(r, EndToken)
 	q := util.New()
@@ -52,8 +56,10 @@ func NewGrammar(token []*lexer.Token, r io.Reader, et string, rule analysisTable
 	return &Grammar{Stream: s, endToken: et, table: rule, tokens: q}
 }
 
+// Analyze 分析
 func (g *Grammar) Analyze() (res []*Production) {
 	for {
+		// 语法分析
 		if g.tokens.Front().(*lexer.Token).Typ == lexer.END && g.Stream.Peek() == "#" {
 			res = append(res, &Production{
 				Type:   "kill",

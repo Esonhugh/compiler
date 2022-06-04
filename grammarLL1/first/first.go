@@ -8,8 +8,11 @@ import (
 	"strings"
 )
 
+// FirstSet 存储 FIRST 集
+// 一个二维度的表格 存储 FIRST 集
 type FirstSet map[string]map[string]struct{}
 
+// GetFirstSet 根据规则构建 FIRST 集
 func GetFirstSet(rules *rule.Rule) FirstSet {
 	firstSet := make(FirstSet)
 	var changed bool
@@ -24,12 +27,13 @@ func GetFirstSet(rules *rule.Rule) FirstSet {
 				// 遍历产生式
 				// 第一个是终结符,直接将终结符加进first集
 				if util.IsTerminal(v[0]) {
+					// 直接合并
 					if mergeSet(firstSet[key], map[string]struct{}{string(v[0]): {}}) != 0 {
 						changed = true
 					}
 					continue
 				} else {
-					// 第一个是非终结符
+					// 第一个是非终结符 去空 合并
 					if removeEmptyAndMergeSet(firstSet[key], firstSet[string(v[0])]) != 0 {
 						changed = true
 					}
@@ -43,8 +47,12 @@ func GetFirstSet(rules *rule.Rule) FirstSet {
 	return firstSet
 }
 
+// removeEmptyAndMergeSet
+// 去掉空终结符 合并 a 和 b 的 map
+// 返回合并变化的个数
 func removeEmptyAndMergeSet(a map[string]struct{}, b map[string]struct{}) int {
 	flag := false
+	// b 集合去空
 	if _, flag = b["&"]; flag {
 		delete(b, "&")
 	}
@@ -61,6 +69,8 @@ func removeEmptyAndMergeSet(a map[string]struct{}, b map[string]struct{}) int {
 	return count
 }
 
+// mergeSet 合并 a 和 b 的 集合
+// 返回合并变化的个数
 func mergeSet(a map[string]struct{}, b map[string]struct{}) int {
 	count := 0
 	for key, value := range b {
@@ -72,6 +82,7 @@ func mergeSet(a map[string]struct{}, b map[string]struct{}) int {
 	return count
 }
 
+// String 转换为字符串 使得 First 集合可以打印出来
 func (f FirstSet) String() string {
 	var build strings.Builder
 	for key, value := range f {
@@ -84,11 +95,13 @@ func (f FirstSet) String() string {
 	return build.String()
 }
 
+// haveEmpty 检查 FIRST 集合是否包含空
 func (f FirstSet) haveEmpty(first string) bool {
 	_, ok := f[first]["&"]
 	return ok
 }
 
+// IsInFirstSet 检查是否在 FIRST 集合中
 func (f FirstSet) IsInFirstSet(first string, target string) bool {
 	for key := range f[first] {
 		if key == target {

@@ -5,19 +5,23 @@ import (
 	"strings"
 )
 
+// 规则合集
 type Rule struct {
 	Rules map[string][]string
 }
 
+// 表达式 分为左右两边
 type Formula struct {
 	Left  string
 	Right string
 }
 
+// 新建一个空的 规则
 func NewRules() *Rule {
 	return &Rule{Rules: make(map[string][]string)}
 }
 
+// 添加规则到规则集和中
 func (r *Rule) AddRules(s string) error {
 	lineRule := strings.Split(s, "\n")
 	for _, t := range lineRule {
@@ -54,7 +58,9 @@ func (r *Rule) TheFirstItemIs(first, item string) string {
 	}
 	return ""
 }
-
+ 
+// GetProcessMethod 获取处理方法 
+// 如果遇到了
 func (r *Rule) GetProcessMethod(first, end string) *Formula {
 	for _, value := range r.Rules[first] {
 		if value[0] == end[0] {
