@@ -1,10 +1,10 @@
 package main
 
 import (
-	"compiler/grammar"
-	"compiler/grammarLL1"
-	"compiler/lexer"
-	servicePrint "compiler/print"
+	"github.com/esonhugh/compiler/grammar"
+	"github.com/esonhugh/compiler/grammarLL1"
+	"github.com/esonhugh/compiler/lexer"
+	servicePrint "github.com/esonhugh/compiler/print"
 	"github.com/gookit/color"
 	"os"
 )

@@ -2,8 +2,8 @@ package lexer
 
 import (
 	"bytes"
-	"compiler/lexer/define"
-	"compiler/util"
+	"github.com/esonhugh/compiler/lexer/define"
+	"github.com/esonhugh/compiler/util"
 	"io"
 	"os"
 	"path/filepath"

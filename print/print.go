@@ -1,10 +1,10 @@
 package print
 
 import (
-	"compiler/grammar"
-	"compiler/grammarLL1"
-	"compiler/lexer"
-	"compiler/util/transfer"
+	"github.com/esonhugh/compiler/grammar"
+	"github.com/esonhugh/compiler/grammarLL1"
+	"github.com/esonhugh/compiler/lexer"
+	"github.com/esonhugh/compiler/util/transfer"
 	"fmt"
 	"github.com/gookit/color"
 	"strings"

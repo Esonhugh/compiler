@@ -2,7 +2,7 @@ package util
 
 import (
 	"bufio"
-	"compiler/lexer/define"
+	"github.com/esonhugh/compiler/lexer/define"
 	"container/list"
 	"fmt"
 	"io"

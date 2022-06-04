@@ -1,10 +1,10 @@
 package follow
 
 import (
-	"compiler/grammarLL1/first"
-	"compiler/grammarLL1/rule"
-	"compiler/grammarLL1/util"
-	"compiler/util/transfer"
+	"github.com/esonhugh/compiler/grammarLL1/first"
+	"github.com/esonhugh/compiler/grammarLL1/rule"
+	"github.com/esonhugh/compiler/grammarLL1/util"
+	"github.com/esonhugh/compiler/util/transfer"
 	"fmt"
 	"strings"
 )

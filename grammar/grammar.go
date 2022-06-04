@@ -2,8 +2,8 @@ package grammar
 
 import (
 	"bytes"
-	"compiler/lexer"
-	"compiler/util"
+	"github.com/esonhugh/compiler/lexer"
+	"github.com/esonhugh/compiler/util"
 	"fmt"
 	"io"
 	"strings"

@@ -1,4 +1,4 @@
-module github.com/esonhugh/complier
+module github.com/esonhugh/compiler
 
 go 1.18
 

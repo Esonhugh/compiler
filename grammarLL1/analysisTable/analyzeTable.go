@@ -1,10 +1,10 @@
 package analysisTable
 
 import (
-	"compiler/grammarLL1/first"
-	"compiler/grammarLL1/follow"
-	"compiler/grammarLL1/rule"
-	"compiler/util/transfer"
+	"github.com/esonhugh/compiler/grammarLL1/first"
+	"github.com/esonhugh/compiler/grammarLL1/follow"
+	"github.com/esonhugh/compiler/grammarLL1/rule"
+	"github.com/esonhugh/compiler/util/transfer"
 	"fmt"
 	"github.com/liushuochen/gotable"
 )
