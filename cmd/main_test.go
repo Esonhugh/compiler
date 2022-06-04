@@ -1,6 +1,8 @@
 package main
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestMakeToken(t *testing.T) {
 	MakeToken("while(a==b)begin\na:=a+1;#zhushi\nb:=b-1;\nc=c*d;\nd=c/d;\nif(a>b) then  c=C else C=c;\nend")
