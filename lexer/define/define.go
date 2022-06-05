@@ -1,6 +1,6 @@
 /*
 Package define
-用于定义处理 正则表达式对 输入的字符进行解析 
+用于定义处理 正则表达式对 输入的字符进行解析
 */
 package define
 
@@ -39,17 +39,18 @@ func IsStringWrap(c string) bool {
 }
 
 var KeyWords = map[string]bool{
-	"begin": true,
-	"end":   true,
-	"if":    true,
-	"then":  true,
-	"else":  true,
-	"for":   true,
-	"while": true,
-	"do":    true,
-	"and":   true,
-	"or":    true,
-	"not":   true,
+	"begin":  true,
+	"end":    true,
+	"if":     true,
+	"then":   true,
+	"else":   true,
+	"for":    true,
+	"while":  true,
+	"do":     true,
+	"and":    true,
+	"or":     true,
+	"not":    true,
+	"return": true,
 }
 
 func IsKeyword(key string) bool {

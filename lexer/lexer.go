@@ -58,11 +58,15 @@ func (l *Lexer) Analyse() []*Token {
 			continue
 		}
 
-		// 分析注释
-		if c == "#" {
+		// 分析注释 '//'
+		if c == "/" && lookahead == "/" {
 			l.PutBack(c)
 			tokens = append(tokens, l.MakeComment())
 			continue
+		}
+		// 分析注释 '/*'
+		if c == `/` && lookahead == `*` {
+			tokens = append(tokens, l.MakeComment2())
 		}
 
 		// 抓括号
@@ -116,13 +120,32 @@ func (l *Lexer) Analyse() []*Token {
 	return tokens
 }
 
-// MakeComment 分析注释
+// MakeComment 分析注释 // 类
 func (l *Lexer) MakeComment() *Token {
 	s := ""
 	for l.HasNext() {
 		c := l.Next()
 		if c == "\n" {
 			break
+		} else {
+			s += c
+		}
+	}
+	return NewToken(COMMENT, s)
+}
+
+// MakeComment2 分析注释 /* ... */ 类
+func (l *Lexer) MakeComment2() *Token {
+	s := ""
+	l.Next()
+	for l.HasNext() {
+		c := l.Next()
+		if c == "*" {
+			if l.Peek() == "/" {
+				break
+			} else {
+				s += c
+			}
 		} else {
 			s += c
 		}
@@ -193,7 +216,7 @@ func (l *Lexer) MakeVarOrKeyword() *Token {
 	return NewToken(VARIABLE, s)
 }
 
-// MakeOp 分析操作符  + - * / % = != < > 
+// MakeOp 分析操作符  + - * / % = != < >
 func (l *Lexer) MakeOp() *Token {
 	state := 0
 
