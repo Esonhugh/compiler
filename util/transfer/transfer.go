@@ -1,3 +1,7 @@
+/*
+Package transfer 产生式的替换 指 E' 等双字符 换为单字符
+
+*/
 package transfer
 
 import "strings"

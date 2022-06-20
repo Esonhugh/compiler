@@ -1,3 +1,7 @@
+/*
+Package analysisTable 分析表构造和处理包
+
+*/
 package analysisTable
 
 import (

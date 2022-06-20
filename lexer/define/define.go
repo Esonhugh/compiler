@@ -1,6 +1,6 @@
 /*
-Package define
-用于定义处理 正则表达式对 输入的字符进行解析
+Package define 用于定义处理 正则表达式对 输入的字符进行解析
+
 */
 package define
 

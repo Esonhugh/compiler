@@ -1,3 +1,7 @@
+/*
+Package util 专属通用函数库
+
+*/
 package util
 
 // IsTerminal 判断是否是终结符 

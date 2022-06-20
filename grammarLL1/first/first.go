@@ -1,3 +1,6 @@
+/*
+Package first  FIRST 集构造处理包
+*/
 package first
 
 import (

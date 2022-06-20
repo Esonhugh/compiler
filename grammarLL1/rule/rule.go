@@ -1,3 +1,7 @@
+/*
+Package rule 规则集 处理产生式
+
+*/
 package rule
 
 import (

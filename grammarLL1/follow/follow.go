@@ -1,3 +1,7 @@
+/*
+Package follow  FOLLOW 集构造处理包
+
+*/
 package follow
 
 import (

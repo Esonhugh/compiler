@@ -1,3 +1,6 @@
+/*
+Package util通用的函数和公共类 主要是通用的流处理器
+*/
 package util
 
 import (

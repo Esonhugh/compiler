@@ -1,3 +1,6 @@
+/*
+Package lexer  (通用)词法分析器模块 
+*/
 package lexer
 
 import (
